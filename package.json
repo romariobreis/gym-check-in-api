@@ -1,0 +1,38 @@
+{
+  "name": "api-solid",
+  "version": "1.0.0",
+  "description": "Gympass style app.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "start": "node build/server.cjs",
+    "build": "tsup src --out-dir build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/romariobreis/api-solid.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/romariobreis/api-solid/issues"
+  },
+  "homepage": "https://github.com/romariobreis/api-solid#readme",
+  "devDependencies": {
+    "@types/node": "26.1.1",
+    "prisma": "7.9.0",
+    "tsup": "8.5.1",
+    "tsx": "4.23.1",
+    "typescript": "7.0.2"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "7.9.0",
+    "@prisma/client": "7.9.0",
+    "dotenv": "17.4.2",
+    "fastify": "5.10.0",
+    "pg": "8.22.0",
+    "zod": "4.4.3"
+  }
+}
