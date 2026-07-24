@@ -26,6 +26,7 @@ dist-ssr
 #others
 tmp
 build
+coverage
 .env
 .env.test
 *.sqlite
