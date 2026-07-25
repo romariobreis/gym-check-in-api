@@ -1,5 +1,3 @@
-import { PrismaUsersRepository } from "@/repositories/prisma/prisma-users-repository.js"
-
 import { describe, expect, it } from "vitest"
 import { RegisterService } from "./register-service.js"
 import { compare } from "bcryptjs"
