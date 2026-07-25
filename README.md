@@ -4,8 +4,8 @@ Gympass style app.
 
 ## RFs
 - [x] Deve ser possível se cadastrar;
-- [] Deve ser possível se autenticar;
-- [] Deve ser possível obter o perfil de um usuário logado;
+- [x] Deve ser possível se autenticar;
+- [x] Deve ser possível obter o perfil de um usuário logado;
 - [] Deve ser possível obter o total de checkins realizado pelo usuário logado;
 - [] Deve ser possível o usuario obter seu histórico de checkins realizados;
 - [] Deve ser possível o usuário buscar academias próximas;
@@ -26,6 +26,6 @@ Gympass style app.
 ## RNF
 
 - [x] A senha do usuário deve ser criptografada;
-- [] Os dados da aplicação devem ser persistidos em um bando de dados postgres;
+- [x] Os dados da aplicação devem ser persistidos em um bando de dados postgres;
 - [] Todas as lista de dados devem ser paginadas (20 itens por pagina);
 - [] O usuário deve ser identificado por um JWT.
