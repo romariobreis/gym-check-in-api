@@ -1,5 +1,5 @@
-import { InvalidCredentialsError } from "@/services/errors/invalid-credentials-error.js"
-import { makeAuthenticateService } from "@/services/factories/make-authenticate-service.js"
+import { InvalidCredentialsError } from "@/use-cases/errors/invalid-credentials-error.js"
+import { makeAuthenticateUseCase } from "@/use-cases/factories/make-authenticate-use-case.js"
 import type { FastifyReply, FastifyRequest } from "fastify"
 import z from "zod"
 
@@ -12,8 +12,8 @@ export async function authenticateController(request: FastifyRequest, reply: Fas
   const { email, password } = authenticateBodySchema.parse(request.body)
 
   try {
-    const authenticateService = makeAuthenticateService()
-    await authenticateService.execute({ email, password })
+    const authenticateUseCase = makeAuthenticateUseCase()
+    await authenticateUseCase.execute({ email, password })
     return reply.status(200).send()
   } catch (error) {
     if (error instanceof InvalidCredentialsError) {

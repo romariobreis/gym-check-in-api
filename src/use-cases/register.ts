@@ -13,10 +13,10 @@ interface RegisterResponse {
   user: User
 }
 
-export class RegisterService {
+export class RegisterUseCase {
   constructor(private usersRepository: UsersRepository) { }
 
-  async registerUser({ name, email, password }: RegisterRequest): Promise<RegisterResponse> {
+  async execute({ name, email, password }: RegisterRequest): Promise<RegisterResponse> {
     const password_hash = await hash(password, 6)
 
     const emailExits = await this.usersRepository.findByEmail(email)
