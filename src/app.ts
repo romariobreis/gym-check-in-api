@@ -1,22 +1,22 @@
 import fastify from "fastify";
-import z from "zod";
-import { prisma } from "./lib/prisma.js";
+import { appRoutes } from "./http/routes.js";
+import z, { ZodError } from "zod";
+import { env } from "./env/index.js";
 
 export const app = fastify()
 
-app.post('/users', async (request, reply) => {
-  const createBodySchema = z.object({
-    name: z.string(),
-    email: z.email(),
-    password: z.string().min(6)
-  })
-  const { name, email, password } = createBodySchema.parse(request.body)
-  await prisma.user.create({
-    data: {
-      name,
-      email,
-      password_hash: password
-    }
-  })
-  return reply.status(201).send()
+app.register(appRoutes)
+
+app.setErrorHandler((error, _request, reply) => {
+  if (error instanceof ZodError) {
+    return reply.status(400).send({ message: "Validation error.", issues: z.treeifyError(error) })
+  }
+
+  if (env.NODE_ENV !== "production") {
+    console.log(error)
+  } else {
+    //TODO: HERE WE SHOULD LOG TO EXTERNAL TOOL LIKE DATADOG/NEWRELIC/SENTRY
+  }
+
+  return reply.status(500).send({ message: "Internal server error." })
 })
