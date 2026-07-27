@@ -25,4 +25,8 @@ export class InMemoryGymsRepository implements GymsRepository {
 
     return gym ?? null
   }
+
+  async findMany(search: string, page: number) {
+    return this.gyms.filter(gym => gym.title.includes(search)).slice((page - 1) * 20, page * 20)
+  }
 }
