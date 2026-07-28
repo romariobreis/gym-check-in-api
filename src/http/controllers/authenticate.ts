@@ -13,8 +13,9 @@ export async function authenticateController(request: FastifyRequest, reply: Fas
 
   try {
     const authenticateUseCase = makeAuthenticateUseCase()
-    await authenticateUseCase.execute({ email, password })
-    return reply.status(200).send()
+    const { user } = await authenticateUseCase.execute({ email, password })
+    const token = await reply.jwtSign({}, { sign: { sub: user.id } })
+    return reply.status(200).send({ token })
   } catch (error) {
     if (error instanceof InvalidCredentialsError) {
       return reply.status(401).send({ message: error.message })
