@@ -8,9 +8,7 @@ export default defineConfig({
     prisma: {}
   },
   test: {
-    // @ts-ignore
-    environmentMatchGlobs: [
-      ['src/http/controllers/**/*.spec.ts', 'prisma']
-    ]
+    setupFiles: ['./vitest-setup.ts'],
+    fileParallelism: false
   }
 })
