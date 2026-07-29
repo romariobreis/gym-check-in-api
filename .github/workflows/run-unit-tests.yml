@@ -9,7 +9,7 @@ jobs:
     
     services:
       api-solid-pg:
-        image: bitnami/postgresql:latest
+        image: postgres:16
         env:
           POSTGRES_USER: docker
           POSTGRES_PASSWORD: docker
@@ -17,7 +17,7 @@ jobs:
         ports:
           - 5432:5432
         options: >-
-          --health-cmd pg_isready
+          --health-cmd "pg_isready -U docker"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
@@ -35,7 +35,5 @@ jobs:
           
       - run: npm ci
       - run: npx prisma generate
-      
       - run: npx prisma migrate deploy
-      
       - run: npm test
