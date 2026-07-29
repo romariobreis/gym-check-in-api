@@ -25,7 +25,7 @@ export class PrismaCheckInsRepository implements CheckInsRepository {
   }
 
   async countByUserId(userId: string) {
-    return prisma.checkIn.count({ where: { id: userId } })
+    return prisma.checkIn.count({ where: { user_id: userId } })
   }
 
   async findById(checkInId: string) {
