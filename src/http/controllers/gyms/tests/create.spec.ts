@@ -5,7 +5,7 @@ import { createAuthenticateUser } from "@/use-cases/utils/test/create-authentica
 
 describe('Create gym (e2e)', () => {
   it('should be able to create a gym', async () => {
-    const { token } = await createAuthenticateUser(app)
+    const { token } = await createAuthenticateUser(app, true)
 
     const response = await request(app.server)
       .post('/gyms')
