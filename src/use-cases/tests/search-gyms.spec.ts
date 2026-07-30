@@ -16,7 +16,6 @@ describe('Search Gyms Use Case', () => {
         longitude: -38.449043
       })
     }
-    console.log(inMemoryGymsRepository.gyms)
   })
 
   it('Should be able to search gyms by title', async () => {

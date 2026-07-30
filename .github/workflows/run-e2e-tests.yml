@@ -1,0 +1,39 @@
+name: Run Unit Tests
+
+on: [pull_request]
+
+jobs:
+  run-unit-tests:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    
+    services:
+      api-solid-pg:
+        image: postgres:16
+        env:
+          POSTGRES_USER: docker
+          POSTGRES_PASSWORD: docker
+          POSTGRES_DB: apisolid
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U docker"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DATABASE_URL: "postgresql://docker:docker@localhost:5432/apisolid?schema=public"
+      JWT_SECRET: "gR%YgT&*UJhY&IUY&*I"
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'npm'
+          
+      - run: npm ci
+      - run: npx prisma generate
+      - run: npx prisma migrate deploy
+      - run: npm run test:e2e
